@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: transaction-statistics
-          image: marciodeveloper/transaction-statistics:latest   # 👉 sua imagem no Docker Hub
+          image: marciodeveloper/transaction-statistics:v1   # 👉 sua imagem no Docker Hub
           ports:
             - containerPort: 8080
           resources:                # limites de recursos (ajuste se necessário)
