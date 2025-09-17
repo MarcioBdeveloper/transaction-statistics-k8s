@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: transaction-statistics
+  namespace: argocd                # 👉 importante: ArgoCD lê apps apenas deste namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MarcioBdeveloper/transaction-statistics-k8s.git   # 👉 seu repositório no GitHub
+    targetRevision: HEAD
+    path: infra   # 👉 pasta dentro do repo onde estão deployment.yaml e service.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default              # 👉 onde os recursos serão aplicados
+  syncPolicy:
+    automated:                      # 👉 habilita sincronização automática
+      prune: true                   # remove recursos não declarados no git
+      selfHeal: true                # corrige drift (desvios) automaticamente
+    syncOptions:
+      - CreateNamespace=true        # cria o namespace se não existir
